@@ -2,8 +2,6 @@
   CSS styling helpers for Simple Form
 */
 
-@import "compass/utilities/general/clearfix";
-
 @mixin no-focus-border { &:focus { outline: none; } }
 
 @mixin simple_form_input($border_color, $focus_color) {
@@ -26,13 +24,17 @@
                     $color: #474a4c,
                     $max_width: 58em,
                     $label_color: #a1a7b2,
+                    $error_color: #bc3737,
                     $input_border_color: #e6e9f0,
-                    $input_focus_color: #6dd2f2) {
+                    $input_focus_color: #6dd2f2 ) {
                                         font-size:  12px;
                                         line-height: 1.5;
                                         max-width:  $max_width;
                                         color:      $color;
 
+  a { text-decoration: none; }
+
+  textarea,
   input                               { @include no-focus-border; }
   .input:not(.hidden)                 { margin-bottom: 1.5em;
 
@@ -43,12 +45,30 @@
     }
     &.file > label                    { @include simple_form_label($label_color); }
     &.boolean > label                 { padding-left: .5em; }
+    &.text > textarea                 { min-height: 4em; }
+
+    // ERRORS
+
+    .error                            { display: block;
+                                        margin-top: .3em;
+                                        color: $error_color;
+    }
+
+    &.field_with_errors               {
+      &.string, &.email, &.url, &.tel, &.password, &.search, &.text, &.integer, &.float, &.decimal, &.range, &.datetime, &.date, &.time, &.select, &.radio_buttons, &.check_boxes, &.country, &.time_zone {
+        & > textarea,
+        & > input                       { border-color: $error_color; }
+        & > label                       { color: $error_color; }
+      }
+    }
+
+    // NESTED
+
+    // ...
 
     // CUSTOM types and preferences
 
-    a { text-decoration: none; }
-
-    // image
+    // IMAGE
     &.image                           { height: 78px;
       & > img                         { position: absolute;
                                         margin-top: -5.5em;
@@ -61,13 +81,26 @@
       & > .input.file input           { padding-left: 64px; margin-top: .5em; }
       & > .boolean                    { padding-left: 64px; }
     }
+
+    // FILE LINK
+    &.file-link                       {
+      & > label                       { @include simple_form_label($label_color); }
+      a                               { display: block; margin-bottom: .5em; }
+    }
   }
 }
 
 .simple_form                          { @include simple_form();
 }
 
-@mixin input { @include simple_form_input(#e6e9f0, #6dd2f2); }
+
+
+
+
+
+
+
+
 
 /*
   .radio input.radio_buttons,
@@ -75,80 +108,9 @@
   select                                { margin-bottom: 20px;
                                           margin-right: 5px;
   }
-
-  textarea                              { min-height: 52px;
-  }
-
-  .input .error                         { position: absolute;
-                                          line-height: 2.4;
-                                          margin-left: .5em;
-                                          font-size: 1em;
-                                          color: $error_color;
-  }
-
-  .input.field_with_errors              {
-    input, textarea                     { border-color: $error_color; }
-  }
-
   .redactor_box                         { margin-bottom: 20px;
   }
 }
-
-.chr-form-small a, .chr-form-large a
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.chr-form-large                         { @extend .chr-form-small;
-                                          font-size: 14px;
-
-  textarea,
-  input[type=text],
-  input[type=email],                    { font-size: 24px;
-                                          color: #414d64;
-                                          font-weight: $font_semi_bold;
-                                          border: none;
-                                          border-bottom: 1px solid #e6e9f0;
-                                          box-shadow: none;
-                                          border-radius: 0px;
-                                          padding: 15px 0;
-    &:focus                             { border-color: #e6e9f0;
-    }
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

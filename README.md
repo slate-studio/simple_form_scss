@@ -15,3 +15,12 @@ CSS styling helpers for [Simple Form](https://github.com/plataformatec/simple_fo
     <% else %>
       <%= f.input :avatar, as: :file %>
     <% end %>
+
+
+### File Link
+
+    <div class='input file-link'>
+      <label class='file optional'>File Link</label>
+      <%= link_to f.object.file.url, f.object.file.url, target: '_blank' %>
+      <%= f.input :file, as: :file, label: false %>
+    </div>
