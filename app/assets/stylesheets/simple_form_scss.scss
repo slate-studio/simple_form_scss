@@ -1,0 +1,181 @@
+/*
+  CSS styling helpers for Simple Form
+*/
+
+@import "compass/utilities/general/clearfix";
+
+@mixin input                            { margin-bottom: 20px;
+                                          border: 1px solid #e6e9f0;
+                                          border-radius: 4px;
+                                          padding: 6px 4px;
+                                          width: 100%;
+                                          box-shadow: 0px 0px 3px 0px #e6e9f0;
+                                          @include no-focus-border;
+  &:focus                               { border-color: lighten($header_color, 25%);
+  }
+}
+
+.chr-form-small a, .chr-form-large a    { text-decoration: none; }
+
+.chr-form-small                         { @include font;
+                                          font-size: 12px;
+                                          color: #474a4c;
+
+  &.chr-form-scrolled-up                { background-color: #f7f7f7;
+                                          border-bottom: 1px solid $list_border_color;
+    > form                              { padding-bottom: 0;
+                                          padding-top: 20px;
+                                          max-width: 700px;
+    }
+  }
+
+  form                                  { padding: 60px;
+                                          max-width: 700px;
+                                          margin: 0 auto;
+  }
+
+  .input .error                         { position: absolute;
+                                          line-height: 2.4;
+                                          margin-left: .5em;
+                                          font-size: 1em;
+                                          color: $error_color;
+  }
+
+  .input.field_with_errors              {
+    input, textarea                     { border-color: $error_color; }
+  }
+
+  label.email,
+  label.tel,
+  label.file,
+  label.date,
+  label.string,
+  label.text,
+  label.url,
+  label.radio_buttons,
+  label.select                          { color: #a1a7b2;
+                                          font-weight: $font_semi_bold;
+                                          display: block;
+                                          margin-bottom: 5px;
+  }
+
+  .radio label.radio_buttons,
+  label.boolean                         { margin-right: 10px;
+  }
+
+  .radio input.radio_buttons,
+  input[type='checkbox'],
+  select                                { margin-bottom: 20px;
+                                          margin-right: 5px;
+  }
+
+  input[type=file]                      { margin-bottom: 20px;
+  }
+
+  textarea,
+  input[type=tel],
+  input[type=text],
+  input[type=url],
+  input[type=email],                    { @include input;
+  }
+
+  textarea                              { min-height: 52px;
+  }
+
+  .image-upload                         { margin-bottom: 20px;
+                                          @include clearfix;
+    img                                 { float: left;
+                                          margin-right: 10px;
+                                          border-radius: 4px;
+                                          width: 56px;
+                                          height: 56px;
+    }
+    input[type='file']                  { margin: 8px 0;
+    }
+    input[type='checkbox']              { margin-bottom: 0;
+    }
+  }
+
+  .redactor_box                         { margin-bottom: 20px;
+  }
+}
+
+
+.chr-form-large                         { @extend .chr-form-small;
+                                          font-size: 14px;
+
+  textarea,
+  input[type=text],
+  input[type=email],                    { font-size: 24px;
+                                          color: #414d64;
+                                          font-weight: $font_semi_bold;
+                                          border: none;
+                                          border-bottom: 1px solid #e6e9f0;
+                                          box-shadow: none;
+                                          border-radius: 0px;
+                                          padding: 15px 0;
+    &:focus                             { border-color: #e6e9f0;
+    }
+  }
+}
+
+.chr-form-nested.sortable-list        {
+  > .fields                           {
+    &:before                          { font-family: FontAwesome;
+                                        content: "\f142";
+                                        float: left;
+                                        font-size: 20px;
+                                        color: #e0e3ea;
+                                        margin: 16px 0px 0 -80px;
+    }
+    &:hover                           {
+      &:before                        { color: $list_item_meta_color;
+      }
+    }
+  }
+}
+
+.chr-form-nested > .fields            { background-color: $list_item_color;
+                                        margin-bottom: 20px;
+                                        padding: 20px 25px;
+                                        border: 1px solid $list_border_color;
+}
+
+.chr-form-nested > a                  { @include button;
+}
+
+.chr-form-nested.chr-form-nested-images {
+  .fields                             { padding-left: 66px + 25px;
+  }
+  label                               { display: none;
+  }
+  img                                 { position: absolute;
+                                        border-radius: 4px;
+                                        width: 56px;
+                                        height: 56px;
+                                        margin: -4px 0 0 -66px;
+  }
+  input.file                          { margin-bottom: 0px;
+  }
+  .input.file, .input.string          { margin-right: 50px;
+  }
+  input.string                        { margin-bottom: 7px;
+                                        background: transparent;
+                                        border: none;
+                                        box-shadow: none;
+                                        padding: 0 0 3px 0;
+                                        font-weight: $font_bold;
+                                        font-size: 14px;
+                                        border-bottom: 1px dashed $list_border_color;
+  }
+  .remove_nested_fields               { @extend .chr-icon, .icon-close-alt;
+                                        display: block;
+                                        width: 20px;
+                                        height: 20px;
+                                        line-height: 0;
+                                        font-size: 0;
+                                        color: transparent;
+                                        float: right;
+                                        margin-top: 13px;
+  }
+}
