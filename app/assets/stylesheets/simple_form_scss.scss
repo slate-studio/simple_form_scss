@@ -4,34 +4,79 @@
 
 @import "compass/utilities/general/clearfix";
 
-@mixin input                            { margin-bottom: 20px;
-                                          border: 1px solid #e6e9f0;
-                                          border-radius: 4px;
-                                          padding: 6px 4px;
-                                          width: 100%;
-                                          box-shadow: 0px 0px 3px 0px #e6e9f0;
-                                          @include no-focus-border;
-  &:focus                               { border-color: lighten($header_color, 25%);
+@mixin no-focus-border { &:focus { outline: none; } }
+
+@mixin simple_form_input($border_color, $focus_color) {
+                                      border-radius: .3em;
+                                      border: 1px solid $border_color;
+                                      box-shadow: 0px 0px .4em 0px $border_color;
+                                      padding: .5em .3em;
+                                      width: 100%;
+  &:focus                           { border-color: $focus_color;
   }
 }
 
-.chr-form-small a, .chr-form-large a    { text-decoration: none; }
+@mixin simple_form_label($color)    { display: block;
+                                      margin-bottom: .3em;
+                                      font-weight: 600;
+                                      color: $color;
+}
 
-.chr-form-small                         { @include font;
-                                          font-size: 12px;
-                                          color: #474a4c;
+@mixin simple_form( $font_size: 12px,
+                    $color: #474a4c,
+                    $max_width: 58em,
+                    $label_color: #a1a7b2,
+                    $input_border_color: #e6e9f0,
+                    $input_focus_color: #6dd2f2) {
+                                        font-size:  12px;
+                                        line-height: 1.5;
+                                        max-width:  $max_width;
+                                        color:      $color;
 
-  &.chr-form-scrolled-up                { background-color: #f7f7f7;
-                                          border-bottom: 1px solid $list_border_color;
-    > form                              { padding-bottom: 0;
-                                          padding-top: 20px;
-                                          max-width: 700px;
+  input                               { @include no-focus-border; }
+  .input:not(.hidden)                 { margin-bottom: 1.5em;
+
+    &.string, &.email, &.url, &.tel, &.password, &.search, &.text, &.integer, &.float, &.decimal, &.range, &.datetime, &.date, &.time, &.select, &.radio_buttons, &.check_boxes, &.country, &.time_zone {
+      & > textarea,
+      & > input                       { @include simple_form_input($input_border_color, $input_focus_color); }
+      & > label                       { @include simple_form_label($label_color); }
+    }
+    &.file > label                    { @include simple_form_label($label_color); }
+    &.boolean > label                 { padding-left: .5em; }
+
+    // CUSTOM types and preferences
+
+    a { text-decoration: none; }
+
+    // image
+    &.image                           { height: 78px;
+      & > img                         { position: absolute;
+                                        margin-top: -5.5em;
+                                        border-radius: .3em;
+                                        width: 56px;
+                                        height: 56px;
+      }
+      & > label                       { @include simple_form_label($label_color); }
+      & > .input.file                 { margin-bottom: .5em; }
+      & > .input.file input           { padding-left: 64px; margin-top: .5em; }
+      & > .boolean                    { padding-left: 64px; }
     }
   }
+}
 
-  form                                  { padding: 60px;
-                                          max-width: 700px;
-                                          margin: 0 auto;
+.simple_form                          { @include simple_form();
+}
+
+@mixin input { @include simple_form_input(#e6e9f0, #6dd2f2); }
+
+/*
+  .radio input.radio_buttons,
+  input[type='checkbox'],
+  select                                { margin-bottom: 20px;
+                                          margin-right: 5px;
+  }
+
+  textarea                              { min-height: 52px;
   }
 
   .input .error                         { position: absolute;
@@ -45,60 +90,32 @@
     input, textarea                     { border-color: $error_color; }
   }
 
-  label.email,
-  label.tel,
-  label.file,
-  label.date,
-  label.string,
-  label.text,
-  label.url,
-  label.radio_buttons,
-  label.select                          { color: #a1a7b2;
-                                          font-weight: $font_semi_bold;
-                                          display: block;
-                                          margin-bottom: 5px;
-  }
-
-  .radio label.radio_buttons,
-  label.boolean                         { margin-right: 10px;
-  }
-
-  .radio input.radio_buttons,
-  input[type='checkbox'],
-  select                                { margin-bottom: 20px;
-                                          margin-right: 5px;
-  }
-
-  input[type=file]                      { margin-bottom: 20px;
-  }
-
-  textarea,
-  input[type=tel],
-  input[type=text],
-  input[type=url],
-  input[type=email],                    { @include input;
-  }
-
-  textarea                              { min-height: 52px;
-  }
-
-  .image-upload                         { margin-bottom: 20px;
-                                          @include clearfix;
-    img                                 { float: left;
-                                          margin-right: 10px;
-                                          border-radius: 4px;
-                                          width: 56px;
-                                          height: 56px;
-    }
-    input[type='file']                  { margin: 8px 0;
-    }
-    input[type='checkbox']              { margin-bottom: 0;
-    }
-  }
-
   .redactor_box                         { margin-bottom: 20px;
   }
 }
+
+.chr-form-small a, .chr-form-large a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .chr-form-large                         { @extend .chr-form-small;
@@ -118,6 +135,27 @@
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .chr-form-nested.sortable-list        {
   > .fields                           {
@@ -179,3 +217,5 @@
                                         margin-top: 13px;
   }
 }
+
+*/
