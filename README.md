@@ -2,6 +2,8 @@
 
 CSS styling helpers for [Simple Form](https://github.com/plataformatec/simple_form).
 
+![Simple Form SCSS Demo](http://character.s3.amazonaws.com/simple_form_demo.png)
+
 ## Setup
 
 Add gem to ```Gemfile```:
