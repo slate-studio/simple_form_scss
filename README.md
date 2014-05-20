@@ -72,3 +72,11 @@ Include and configure form styles in ```application.scss```:
       <% end %>
       <%= f.link_to_add "Add an Image", :images %>
     </div>
+
+## Author
+
+Alexander Kravets @ [Slate Studio](http://www.slatestudio.com)
+
+## License
+
+MIT
