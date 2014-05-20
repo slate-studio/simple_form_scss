@@ -10,6 +10,7 @@
                            $border_width: 2px,
                            $hover_color: #1fc776)
                                       { display: inline-block;
+                                        background-color: transparent;
                                         text-align: center;
                                         font-weight: 600;
                                         color: $color;
@@ -49,9 +50,9 @@
   }
 }
 
-@mixin simple_form( $font_size: 12px,
+@mixin simple_form( $base_font_size: 12,
                     $color: #474a4c,
-                    $max_width: 58em,
+                    $max_width: 58,
                     $label_color: #a1a7b2,
                     $error_color: #bc3737,
                     $input_border_color: #e6e9f0,
@@ -61,9 +62,11 @@
                     $button_color: #9ca1ab,
                     $button_border_color: #d1d6e0,
                     $button_hover_color: #1fc776) {
-                                        font-size:  12px;
+
+  $font_size: $base_font_size * 1px;
+                                        font-size:  $font_size;
                                         line-height: 1.5;
-                                        max-width:  $max_width;
+                                        max-width:  $max_width * 1em;
                                         color:      $color;
 
   a { text-decoration: none; }
@@ -121,6 +124,7 @@
   }
 
   // BUTTONS
+  input[type=submit],
   .button,
   .nested_form .add_nested_fields     { @include simple_form_button( $button_color,
                                                                      $button_border_color,
@@ -157,7 +161,7 @@
                                         font-weight: 600;
                                         background: transparent;
                                         border: none;
-                                        border-bottom: 1px dashed $list_border_color;
+                                        border-bottom: 1px dashed $input_border_color;
                                         box-shadow: none;
       }
       img                             { position: absolute;
