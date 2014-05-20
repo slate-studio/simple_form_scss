@@ -20,6 +20,9 @@ Include and configure form styles in ```application.scss```:
       $error_color:         #bc3737;
       $input_border_color:  #e6e9f0;
       $input_focus_color:   #6dd2f2;
+      $button_color:        #9ca1ab;
+      $button_border_color: #d1d6e0;
+      $button_hover_color:  #1fc776;
 
       @include simple_form( $font_size,
                             $color,
@@ -27,7 +30,10 @@ Include and configure form styles in ```application.scss```:
                             $label_color,
                             $error_color,
                             $input_border_color,
-                            $input_focus_color );
+                            $input_focus_color,
+                            $button_color,
+                            $button_border_color,
+                            $button_hover_color );
     }
 
 ## Custom Types
